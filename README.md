@@ -147,3 +147,82 @@ This module provides a complete set of endpoints to manage products in an e-comm
 - Validates product fields like name, price, description, category, etc.
 
 ---
+
+# 🛒 Orders API:
+
+This module is part of a full-stack e-commerce application built with the MERN stack. It includes all API endpoints to manage **products**, **product reviews**, and **orders**.
+
+---
+
+---
+
+## 📦 Product API Endpoints
+
+| Method | Endpoint                                              | Description                    | Middleware                                |
+| ------ | ----------------------------------------------------- | ------------------------------ | ----------------------------------------- |
+| POST   | `/add-product`                                        | Add a new product              | `validationPostProduct`, `authMiddleware` |
+| GET    | `/get-all-products`                                   | Get all products (Admin Only)  | `authMiddleware`, `isAdminMiddleware`     |
+| GET    | `/get-product/:id`                                    | Get a product by its ID        | `authMiddleware`                          |
+| PUT    | `/update-product/:id`                                 | Update a product (Admin Only)  | `authMiddleware`, `isAdminMiddleware`     |
+| DELETE | `/delete-product/:id`                                 | Delete a product (Admin Only)  | `authMiddleware`, `isAdminMiddleware`     |
+| GET    | `/get-products-by-category?category=Electronics`      | Filter products by category    | `authMiddleware`                          |
+| POST   | `/create-product-review/:id`                          | Create a review for a product  | `authMiddleware`                          |
+| GET    | `/get-product-reviews/:id`                            | Get all reviews for a product  | `authMiddleware`                          |
+| DELETE | `/delete-product-review/:productId/reviews/:reviewId` | Delete a review from a product | `authMiddleware`                          |
+
+---
+
+## 📦 Product Controller Functions
+
+- `postNewProduct` – Create a new product
+- `getAllProducts` – Get list of all products (Admin only)
+- `getProductById` – Get product details by ID
+- `updateProductById` – Update product details (Admin only)
+- `deleteProductById` – Remove a product (Admin only)
+- `getProductsByCategory` – Get products by category
+- `createProductReview` – Submit a review for a product
+- `getProductReviews` – Retrieve product reviews
+- `deleteProductReview` – Remove a review from a product
+
+---
+
+## 📦 Order API Endpoints
+
+| Method | Endpoint            | Description                       | Middleware                                 |
+| ------ | ------------------- | --------------------------------- | ------------------------------------------ |
+| POST   | `/create-order`     | Create a new order                | `validationsCreateOrder`, `authMiddleware` |
+| GET    | `/all-orders`       | Get all orders (Admin only)       | `authMiddleware`, `isAdminMiddleware`      |
+| GET    | `/my-orders`        | Get all orders placed by the user | `authMiddleware`                           |
+| PUT    | `/update-order/:id` | Update an existing order          | `authMiddleware`                           |
+| DELETE | `/delete-order/:id` | Cancel/delete an order            | `authMiddleware`                           |
+
+---
+
+## 📦 Order Controller Functions
+
+- `createOrder` – Create and place a new order
+- `getAllOrders` – Fetch all orders (Admin only)
+- `getMyOrders` – Get orders placed by current user
+- `updateOrder` – Modify an order (status, payment, etc.)
+- `deleteOrder` – Delete/cancel a user order
+
+---
+
+## 🛡️ Middlewares
+
+### `authMiddleware`
+
+- Ensures that the user is authenticated using JWT/session.
+
+### `isAdminMiddleware`
+
+- Grants access to admin-only routes after role verification.
+
+---
+
+## ✅ Validations
+
+- `validationPostProduct` – Ensures product fields (e.g., name, price, category) are correct before creation.
+- `validationsCreateOrder` – Verifies product list, shipping address, total amount before processing an order.
+
+---
