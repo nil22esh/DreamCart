@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dbConnection from "./db/db.js";
 import userRouter from "./routes/user.routes.js";
+import productRouter from "./routes/product.routes.js";
 
 dotenv.config();
 dbConnection();
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/products", productRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port} in ${env} mode`);

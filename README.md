@@ -75,3 +75,75 @@ Base URL: `/api/users`
 | `validateUpdatePassword` | Enforces password strength during reset        |
 
 ---
+
+# 📦 Product API - RESTful Routes Documentation
+
+This module provides a complete set of endpoints to manage products in an e-commerce platform. It includes features for product creation, updating, deletion, review management, and categorization. Admin privileges are required for sensitive operations like managing products, while authenticated users can post reviews.
+
+---
+
+## 🔄 API Endpoints
+
+| Method | Endpoint                                              | Description                    | Middleware                                |
+| ------ | ----------------------------------------------------- | ------------------------------ | ----------------------------------------- |
+| POST   | `/add-product`                                        | Add a new product              | `validationPostProduct`, `authMiddleware` |
+| GET    | `/get-all-products`                                   | Get all products (Admin Only)  | `authMiddleware`, `isAdminMiddleware`     |
+| GET    | `/get-product/:id`                                    | Get a product by its ID        | `authMiddleware`                          |
+| PUT    | `/update-product/:id`                                 | Update a product (Admin Only)  | `authMiddleware`, `isAdminMiddleware`     |
+| DELETE | `/delete-product/:id`                                 | Delete a product (Admin Only)  | `authMiddleware`, `isAdminMiddleware`     |
+| GET    | `/get-products-by-category?category=Electronics`      | Filter products by category    | `authMiddleware`                          |
+| POST   | `/create-product-review/:id`                          | Create a review for a product  | `authMiddleware`                          |
+| GET    | `/get-product-reviews/:id`                            | Get all reviews for a product  | `authMiddleware`                          |
+| DELETE | `/delete-product-review/:productId/reviews/:reviewId` | Delete a review from a product | `authMiddleware`                          |
+
+---
+
+## 🧠 Controllers
+
+### `postNewProduct(req, res)`
+
+- Adds a new product to the database.
+
+### `getAllProducts(req, res)`
+
+- Returns all products (Admin only).
+
+### `getProductById(req, res)`
+
+- Fetches a product by its unique identifier.
+
+### `updateProductById(req, res)`
+
+- Updates product details (Admin only).
+
+### `deleteProductById(req, res)`
+
+- Deletes a product from the database (Admin only).
+
+### `getProductsByCategory(req, res)`
+
+- Filters products based on query param `category`.
+
+### `createProductReview(req, res)`
+
+- Adds a review for a product.
+
+### `getProductReviews(req, res)`
+
+- Fetches all reviews for a given product.
+
+### `deleteProductReview(req, res)`
+
+- Deletes a specific review from a product.
+
+---
+
+---
+
+## ✅ Validation
+
+### `validationPostProduct`
+
+- Validates product fields like name, price, description, category, etc.
+
+---
